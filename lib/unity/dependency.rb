@@ -11,17 +11,14 @@ module Unity
       Thread.current[:__dependency_thread_instances__] ||= {}
     end
 
-    # @return [self]
-    def use
-      instance
-    end
-
+    # Returns an instance of self attached to the current thread
     # @return [self]
     def instance
       instances = __dependency_thread_instances__
-      return instances[self.class] if instances.key?(self.class)
+      klass_name = self.class.name
+      return instances[klass_name] if instances.key?(klass_name)
 
-      instances[name] = new
+      instances[klass_name] = new
     end
   end
 end
