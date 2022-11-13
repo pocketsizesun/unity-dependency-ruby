@@ -15,7 +15,7 @@ module Unity
     # @return [self]
     def instance
       instances = __dependency_thread_instances__
-      klass_name = self.class.name
+      klass_name = self.name
       return instances[klass_name] if instances.key?(klass_name)
 
       instances[klass_name] = new
